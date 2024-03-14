@@ -1,0 +1,115 @@
+import java.util.*;
+
+
+
+
+public class Lab5CS3 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println("Welcome to our little dictionary with Trie");
+		Trie aTrie= new Trie();
+		//Start to build the Dictionary 
+	
+		
+		aTrie.insert("consider", "deem to be");
+		aTrie.insert("consider", "infinitely or immeasurably small");
+		aTrie.insert("accord", "concurrence of opinion");
+		aTrie.insert("evident", "clearly revealed to the mind or the senses or judgment");
+		aTrie.insert("practice", "a customary way of operation or behavior");
+		aTrie.insert("intend", "have in mind as a purpose");
+		aTrie.insert("concern", "something that interests you because it is important");
+		aTrie.insert("commit", "perform an act, usually with a negative connotation");
+		aTrie.insert("issue", "some situation or event that is thought about");
+		aTrie.insert("approach","move towards");
+		
+		System.out.println("You can start to search by typing a word");
+		aTrie.print(aTrie.root, 0, new StringBuilder(""));
+		Scanner myScanner = new Scanner(System.in);
+		while(myScanner.hasNext()) {
+		String aWord = myScanner.nextLine();
+		System.out.println(aTrie.getMeaning(aWord));
+		
+		}
+		
+		myScanner.close();
+	}
+
+}
+
+class Trie {
+	TrieNode root;
+		
+	public Trie() {
+		root = new TrieNode();
+	}
+	
+	//Add a word to trie, 
+	 public void insert(String word, String meaning) {
+	        
+	        
+	 }
+	 
+	 //Search for a word in a Trie and return its meaning,
+	 //if the word didn't existed, return "No such word!",
+	 //Otherwise return the meaning of the word. 
+	 
+	 public String getMeaning(String word) {
+		
+		 return "No such word!";
+		 }
+			
+	 /** Returns if the word is in the trie. */
+	    public boolean search(String word) {
+	        TrieNode current = root;
+	        for(int i=0;i<word.length();i++)
+	        {
+	            char c = word.charAt(i);
+	            if(current.children.containsKey(c)){
+	                current = current.children.get(c);
+	            }
+	            else return false;
+	        }
+	        if(current.isEndOfWord==true) return true;
+	        return false;
+	    }
+	    
+	    /** Returns if there is any word in the trie that starts with the given prefix. */
+	    public boolean startsWith(String prefix) {
+	        TrieNode current = root;
+	        for(int i=0;i<prefix.length();i++)
+	        {
+	            char c = prefix.charAt(i);
+	            if(current.children.containsKey(c)){
+	                current = current.children.get(c);
+	            }
+	            else return false;
+	        }
+	        return true;
+	    }
+			
+			
+	    public void print(TrieNode rootNode,int level, StringBuilder sequence) {
+	        if(rootNode.isEndOfWord){
+	            sequence = sequence.insert(level, "");
+	            System.out.println(sequence);
+	        }
+
+	        Map<Character, TrieNode> children = rootNode.children;
+	        Iterator<Character> iterator = children.keySet().iterator();
+	        while (iterator.hasNext()) {
+	            char character = iterator.next();
+	            sequence = sequence.insert(level, character); 
+	            print(children.get(character), level+1, sequence);
+	            sequence.deleteCharAt(level);
+	        }
+	    }
+	    
+	   //TrieNode class
+			class TrieNode{
+				private Map<Character, TrieNode> children = new HashMap<>();
+				private boolean isEndOfWord = false;
+				private String meaning = "";
+				
+			}
+}
