@@ -9,3 +9,4 @@ One of my favorite courses so far has been Media Aesthetics and Criticism, where
 ---
 
 ![My Picture](thumbnail_FullSizeRender.jpg)
+![thumbnail_FullSizeRender](https://github.com/user-attachments/assets/a34af3d6-d0e1-493d-ade8-faea991c3593)
